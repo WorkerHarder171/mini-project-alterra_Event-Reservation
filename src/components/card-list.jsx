@@ -43,6 +43,9 @@ function Card() {
                   ? data.desc.slice(0, maxDescriptionLength) + "..."
                   : data.desc}
               </p>
+              <p className="mb-3 font-semibold text-gray-90 ">
+                {data.date}
+              </p>
             </div>
             <Link
               to={`/event-details/${data.id}`}

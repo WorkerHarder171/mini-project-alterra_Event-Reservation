@@ -8,7 +8,7 @@ const EventDetails = () => {
 
   const event = useSelector((state) => state.card.event);
   const details = event.find((data) => data.id === id);
-  const { name, image, city, desc } = details;
+  const { name, image, city, desc, date} = details;
   return (
     <>
       <Header />
@@ -19,7 +19,7 @@ const EventDetails = () => {
           alt={name}
         />
         <p className="text-4xl font-bold my-5">{name}</p>
-        <p className="text-md text-gray-700 mb-5">{city}</p>
+        <p className="text-md text-gray-900 font-semibold mb-5">{city} <span> - </span> {date}</p>
         <p className="text-xl font-regular">{desc}</p>
       </div>
       <RSVP />
