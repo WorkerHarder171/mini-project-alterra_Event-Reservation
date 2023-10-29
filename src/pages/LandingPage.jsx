@@ -8,7 +8,7 @@ const LandingPage = () => {
     <>
       <Header />
       <Jumbotron />
-      <p className="p-12 text-center w-3/5 mx-auto md:max-w-3xl sm:max-w-2xl">
+      <p id="about" className="p-12 text-center w-3/5 mx-auto lg:max-w-6xl md:max-w-3xl sm:max-w-xl">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ac
         diam sed arcu iaculis varius. Phasellus vel velit sit amet sapien
         tristique condimentum. Nulla auctor efficitur quam, id tempus odio

@@ -105,11 +105,11 @@ const FormInputUser = () => {
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
               onChange={handleOnChange}
             >
-              <option selected=""></option>
-              <option defaultValue="US">1 year</option>
-              <option defaultValue="CA">2 years</option>
-              <option defaultValue="FR">3 years</option>
-              <option defaultValue="DE">4 years ++</option>
+              <option value=""></option>
+              <option value="1 year">1 year</option>
+              <option value="2 years">2 years</option>
+              <option value="3 year">3 years</option>
+              <option value="4 year">4 years ++</option>
             </select>
           </div>
           <div className="mb-6">
@@ -124,7 +124,7 @@ const FormInputUser = () => {
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
               onChange={handleOnChange}
             >
-              <option selected=""></option>
+              <option value=""></option>
               <option value="US">1 year</option>
               <option value="CA">2 years</option>
               <option value="FR">3 years</option>

@@ -1,9 +1,17 @@
-
+import { useSelector } from "react-redux";
+import { useState } from "react";
 
 const HeaderAdmin = () => {
+  const event = useSelector();
+
+  const [searchField, setSearchField] = useState("");
+
+  const filteredProduct = event.filter((product) => {
+    return product.eventName.toLowerCase().includes(searchField.toLowerCase());
+  });
   return (
     <nav className="bg-white border-gray-200 dark:bg-gray-900">
-      <div className="max-w-screen-xl flex items-center justify-between mx-auto  p-6">
+      <div className="lg:max-w-4xl md:max-w-xl sm:max-w-md xs:max-w-xs flex items-center justify-between mx-auto  p-6">
         <div className="flex">
           <button
             type="button"
@@ -22,7 +30,7 @@ const HeaderAdmin = () => {
               <path
                 stroke="currentColor"
                 strokeLinecap="round"
-                strokeLinejoin="round"
+                strokeLinejoin="round "
                 strokeWidth={2}
                 d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
               />
@@ -51,6 +59,8 @@ const HeaderAdmin = () => {
             <input
               type="text"
               id="search-navbar"
+              value={searchField}
+              onChange={(e) => setSearchField(e.target.value)}
               className="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Search..."
             />
@@ -80,7 +90,6 @@ const HeaderAdmin = () => {
             </svg>
           </button>
         </div>
-
       </div>
     </nav>
   );

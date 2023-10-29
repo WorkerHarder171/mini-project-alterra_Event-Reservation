@@ -22,14 +22,15 @@ function NavRoutes() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/sign-up" element={<SignUp />} />
+
         <Route path="/" element={<PrivateRoute />}>
           <Route path="/form-reservation" element={<FormReservation />} />
+          <Route path="/dashboard-admin" element={<DashboardAdmin />} />
           <Route path="/event-details/:id" element={<EventDetails />} />
+          <Route path="/form-edit-admin/:id" element={<FormEditAdmin />} />
+          <Route path="/create-event" element={<FormCreateEventAdmin />} />
         </Route>
 
-        <Route path="/create-event" element={<FormCreateEventAdmin />} />
-        <Route path="/dashboard-admin" element={<DashboardAdmin />} />
-        <Route path="/form-edit-admin/:id" element={<FormEditAdmin />} />
         <Route path="/" element={<ProtectedRoutes />}>
           <Route path="/logoutsession" element={<LogoutSession />} />
         </Route>

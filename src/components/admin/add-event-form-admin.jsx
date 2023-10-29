@@ -1,19 +1,103 @@
+// import library
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getApiEvent, postApiEvent } from "../../store/registerSlice";
 import { useNavigate } from "react-router-dom";
 
 const AddEventAdmin = () => {
+  // const useState
   const [event, setEvent] = useState([]);
   const [file, setFile] = useState();
   const [fields, setFields] = useState();
+  const [validation, setValidation] = useState({});
 
+  // const variable
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  // const Regex
+  const imageRegex = /\.(jpg|jpeg|png)$/i;
+  const quotaRegex = /^\d+(\.\d{1,2})?$/;
+
+  // useEffect
   useEffect(() => {
     dispatch(getApiEvent());
   }, [dispatch]);
+
+  // Validasi Product
+  const validateEvent = () => {
+    let isValid = true;
+    const error = {};
+
+    // validasi eventName
+    if (event.eventName === "") {
+      error.eventName = "Event Name is required";
+      isValid = true;
+    } else if (event.eventName.length > 25) {
+      error.eventName = "Event Name must not exceed 25 characters";
+      isValid = true;
+    } else if (event.eventName.length < 3) {
+      error.eventName = "Event Name must be at least 3 characters.";
+      isValid = true;
+    } else {
+      error.eventName = "";
+      isValid = false;
+    }
+
+    // validasi imageEvent
+    if (event.imageEvent === "") {
+      error.imageEvent = "Image is required";
+      isValid = true;
+    } else if (!imageRegex.test(event.imageEvent)) {
+      error.imageEvent = "Please upload a file jpg, jpeg, or png";
+      isValid = true;
+    } else {
+      error.imageEvent = "";
+      isValid = false;
+    }
+
+    // validasi descEvent
+    if (event.descEvent === "") {
+      error.descEvent = "Description is required";
+      isValid = true;
+    } else {
+      error.descEvent = "";
+      isValid = false;
+    }
+
+    // validasi quotaEvent
+    if (event.quotaEvent === "") {
+      error.quotaEvent = "Quota is require";
+      isValid = true;
+    } else if (!quotaRegex.test(event.quotaEvent)) {
+      error.quotaEvent = "Please input a valid number";
+      isValid = true;
+    } else {
+      error.quotaEvent = "";
+      isValid = false;
+    }
+
+    // validasi cityEvent
+    if (event.cityEvent === "") {
+      error.cityEvent = "City is required";
+      isValid = true;
+    } else {
+      error.cityEvent = "";
+      isValid = false;
+    }
+
+    // validasi dateEvent
+    if (event.dateEvent === "") {
+      error.dateEvent = "Date is require";
+      isValid = true;
+    } else {
+      error.dateEvent = "";
+      isValid = false;
+    }
+
+    setValidation(error);
+    return isValid;
+  };
 
   //Convert file gambar
   const convertToBase64 = (file) => {
@@ -29,8 +113,8 @@ const AddEventAdmin = () => {
     });
   };
 
+  // handleOnChange
   const handleOnChange = async (e) => {
-    e.preventDefault();
     const { name, value, type } = e.target;
     if (type === "file") {
       const file = e.target.files[0];
@@ -46,31 +130,37 @@ const AddEventAdmin = () => {
         ...event,
         [name]: value,
       });
+      validateEvent();
     }
-    setEvent({ ...event, [name]: value });
   };
-console.log("check Event => " ,event)
 
+  console.log("check Event => ", event);
+
+  // handleOnSubmit
   const handleOnSubmit = (e) => {
     e.preventDefault;
-    const newEvent = {
-      eventName: event.eventName,
-      imageEvent: file,
-      descEvent: event.descEvent,
-      quotaEvent: event.quotaEvent,
-      cityEvent: event.cityEvent,
-      dateEvent: event.dateEvent,
-    };
-    dispatch(postApiEvent(newEvent));
-    alert("Data berhasil ditambahkan");
-    navigate("/dashboard-admin");
-
+    const hasError = validateEvent();
+    if (!hasError) {
+      const newEvent = {
+        name: event.eventName,
+        image: file,
+        desc: event.descEvent,
+        quota: event.quotaEvent,
+        city: event.cityEvent,
+        date: event.dateEvent,
+      };
+      dispatch(postApiEvent(newEvent));
+      alert("Data berhasil ditambahkan");
+      navigate("/dashboard-admin");
+    } else {
+      alert("Data Invalid");
+    }
   };
   return (
     <>
       <div className="h-screen flex justify-center items-center mx-auto">
         <form className="w-2/6" onSubmit={handleOnSubmit}>
-          <h1 className="text-3xl font-bold italic mb-5">Registration</h1>
+          <h1 className="text-3xl font-bold italic mb-5">Add Event</h1>
           <div className="mb-3">
             <label
               htmlFor="eventName"
@@ -86,7 +176,17 @@ console.log("check Event => " ,event)
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
               placeholder="Release Party"
               onChange={handleOnChange}
+              style={{
+                border: validation?.eventName
+                  ? "2px solid red"
+                  : "1px solid #ccc", // deepscan-disable-line // deepscan-disable-line INSUFFICIENT_NULL_CHECK
+              }}
             />
+            {validation?.eventName && (
+              <div className="error py-2" style={{ color: "red" }}>
+                {validation?.eventName}
+              </div>
+            )}
           </div>
           <div className="mb-3">
             <label
@@ -102,7 +202,17 @@ console.log("check Event => " ,event)
               value={event.imageEvent}
               type="file"
               onChange={handleOnChange}
+              style={{
+                border: validation?.imageEvent
+                  ? "2px solid red"
+                  : "1px solid #ccc", // deepscan-disable-line // deepscan-disable-line INSUFFICIENT_NULL_CHECK
+              }}
             />
+            {validation?.imageEvent && (
+              <p className="error py-2" style={{ color: "red" }}>
+                {validation?.imageEvent}
+              </p>
+            )}
           </div>
           <div className="mb-3">
             <label
@@ -119,7 +229,17 @@ console.log("check Event => " ,event)
               rows="4"
               className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 "
               placeholder="Write your thoughts here..."
+              style={{
+                border: validation?.descEvent
+                  ? "2px solid red"
+                  : "1px solid #ccc", // deepscan-disable-line // deepscan-disable-line INSUFFICIENT_NULL_CHECK
+              }}
             ></textarea>
+            {validation?.descEvent && (
+              <p className="error py-2" style={{ color: "red" }}>
+                {validation?.descEvent}
+              </p>
+            )}
           </div>
           <div className="mb-3">
             <label
@@ -136,7 +256,17 @@ console.log("check Event => " ,event)
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
               placeholder="50"
               onChange={handleOnChange}
+              style={{
+                border: validation?.quotaEvent
+                  ? "2px solid red"
+                  : "1px solid #ccc",
+              }}
             />
+            {validation?.quotaEvent && (
+              <p className="error py-2" style={{ color: "red" }}>
+                {validation?.quotaEvent}
+              </p>
+            )}
           </div>
           <div className="mb-3">
             <label
@@ -151,13 +281,23 @@ console.log("check Event => " ,event)
               value={event.cityEvent}
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
               onChange={handleOnChange}
+              style={{
+                border: validation?.cityEvent
+                  ? "2px solid red"
+                  : "1px solid #ccc",
+              }}
             >
-              <option selected="">Select City</option>
+              <option value="">Select City</option>
               <option value="Jakarta">Jakarta</option>
               <option value="Semarang">Semarang</option>
               <option value="Surabaya">Surabaya</option>
               <option value="Bandung">Bandung</option>
             </select>
+            {validation?.cityEvent && (
+              <p className="error py-2" style={{ color: "red" }}>
+                {validation?.cityEvent}
+              </p>
+            )}
           </div>
           <div className="mb-3">
             <label
@@ -185,8 +325,18 @@ console.log("check Event => " ,event)
                 onChange={handleOnChange}
                 className="bg-gray-50 border  border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 "
                 placeholder="Select date"
+                style={{
+                  border: validation?.dateEvent
+                    ? "2px solid red"
+                    : "1px solid #ccc",
+                }}
               />
             </div>
+            {validation?.dateEvent && (
+              <p className="error py-2" style={{ color: "red" }}>
+                {validation?.dateEvent}
+              </p>
+            )}
           </div>
           <button
             type="button"

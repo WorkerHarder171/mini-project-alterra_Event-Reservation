@@ -7,13 +7,21 @@ import { Link } from "react-router-dom";
 function Card() {
   const event = useSelector((state) => state.card.event);
   const dispatch = useDispatch();
+  const maxDescriptionLength = 250; // Ganti dengan panjang maksimum yang Anda inginkan
 
   useEffect(() => {
     dispatch(getApiEvent());
   }, [dispatch]);
 
+  useEffect(() => {
+    console.log(event);
+  }, [event]);
+
   return (
-    <div className="container mx-auto lg:max-w-7xl md:max-w-xl sm:max-w-md">
+    <div
+      id="list-event"
+      className="container mx-auto lg:max-w-7xl md:max-w-xl sm:max-w-md"
+    >
       <p className="text-3xl font-bold">List Event</p>
       <div className="container mx-auto gap-5 p-10  border-4 border-dashed m-10 overflow-y-auto max-h-screen ">
         {event?.map((data) => (
@@ -23,15 +31,17 @@ function Card() {
           >
             <img
               className="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 sm:max-w-xs  md:rounded-none md:rounded-l-lg "
-              src={data.imageEvent}
-              alt={data.eventName}
+              src={data.image}
+              alt={data.name}
             />
             <div className="flex flex-col w-7/12 justify-between p-4 leading-normal">
               <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 ">
-                {data.eventName}
+                {data.name}
               </h5>
               <p className="mb-3 font-normal text-gray-700 ">
-                {data.descEvent}
+                {data.desc.length > maxDescriptionLength
+                  ? data.desc.slice(0, maxDescriptionLength) + "..."
+                  : data.desc}
               </p>
             </div>
             <Link

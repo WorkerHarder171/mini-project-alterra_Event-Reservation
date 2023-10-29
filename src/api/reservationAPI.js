@@ -1,8 +1,8 @@
 import {AxiosError} from "axios";
-import { axiosInstance } from "../config/axiosInstance";
+import {axiosInstance} from "../config/axiosInstance";
 
 export const getReservation = {
-  addEvent: async (data) => {
+  postEvent: async (data) => {
     try {
       const response = await axiosInstance.post("/event", data);
       return response.data;
@@ -11,9 +11,9 @@ export const getReservation = {
       throw new Error(error);
     }
   },
-  getPost: async () => {
+  getEvent: async (id) => {
     try {
-      const response = await axiosInstance.get("/event");
+      const response = await axiosInstance.get("/event",id);
       return response.data;
     } catch (error) {
       if (error instanceof AxiosError) throw new Error(AxiosError);
