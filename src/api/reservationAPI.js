@@ -1,5 +1,5 @@
 import {AxiosError} from "axios";
-import {axiosInstance} from "../config/axiosInstance";
+import {axiosInstance} from "../config/AxiosInstance";
 
 export const getReservation = {
   postEvent: async (data) => {

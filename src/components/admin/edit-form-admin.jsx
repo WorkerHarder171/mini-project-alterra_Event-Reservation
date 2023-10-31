@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useParams, Link } from "react-router-dom";
-import { editApiEvent } from "../../store/registerSlice";
+import { editApiEvent } from "../../store/RegisterSlice";
 
 const EditFormAdmin = () => {
   const events = useSelector((state) => state.card.event);

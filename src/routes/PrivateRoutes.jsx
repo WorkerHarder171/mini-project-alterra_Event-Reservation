@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom"
-import { authService } from "../config/auth"
+import { authService } from "../config/Auth"
 import Unauthorized from "../error/Unauthorized"
 
 export function PrivateRoute() {

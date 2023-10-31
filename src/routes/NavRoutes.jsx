@@ -12,9 +12,9 @@ import SignUp from "../pages/Register";
 import EventDetails from "../pages/EventDetails";
 import { PrivateRoute } from "./PrivateRoutes";
 import { ProtectedRoutes } from "./ProtectedRoutes";
-import ErrorNotFound from "./../error/notfound";
+import ErrorNotFound from "./../error/NotFound";
 import Unauthorized from "../error/Unauthorized";
-import LogoutSession from "../error/logout-session";
+import LogoutSession from "../error/LogoutSession";
 function NavRoutes() {
   return (
     <BrowserRouter>

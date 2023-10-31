@@ -1,7 +1,7 @@
 // import library
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { getApiEvent, postApiEvent } from "../../store/registerSlice";
+import { getApiEvent, postApiEvent } from "../../store/RegisterSlice";
 import { useNavigate } from "react-router-dom";
 
 const AddEventAdmin = () => {

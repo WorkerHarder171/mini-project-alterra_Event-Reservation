@@ -1,5 +1,5 @@
 import Cookies from "js-cookie";
-import { auth } from "../config/firebase";
+import { auth } from "../config/Firebase";
 import { signOut } from "firebase/auth";
 
 export class AuthService {

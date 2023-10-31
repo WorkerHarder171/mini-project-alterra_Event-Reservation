@@ -1,12 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
-import { getApiEvent } from "../../store/registerSlice";
+import { getApiEvent } from "../../store/RegisterSlice";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import {
   deleteApiEvent,
   toggleShouldFetchLatestEvents,
-} from "../../store/registerSlice";
+} from "../../store/RegisterSlice";
 
 const TableAdmin = () => {
   const { event, shouldFetchLatestEvents } = useSelector((state) => state.card);

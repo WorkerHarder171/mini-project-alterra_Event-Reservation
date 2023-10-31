@@ -2,8 +2,8 @@ import { Menu, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { Link } from "react-router-dom";
-import { authService } from "./../config/auth";
-import { auth } from "../config/firebase";
+import { authService } from "../config/Auth";
+import { auth } from "../config/Firebase";
 
 export default function Example() {
   const handleLogout = () => {

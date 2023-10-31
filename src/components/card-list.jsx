@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { getApiEvent } from "../store/registerSlice";
+import { getApiEvent } from "../store/RegisterSlice";
 import { Link } from "react-router-dom";
 
 function Card() {
