@@ -1,8 +1,8 @@
-import { auth, provider } from "../config/firebase";
+import { auth, provider } from "../config/Firebase";
 import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { authService } from "../config/auth";
+import { authService } from "../config/Auth";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
@@ -23,6 +23,7 @@ export const Login = () => {
       console.error(err);
     }
   };
+
   const signInWithGoogle = async () => {
     try {
       const res = await signInWithPopup(auth, provider);

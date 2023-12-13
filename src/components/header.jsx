@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { auth } from "../config/Firebase";
-import Dropdown from "./Dropdown";
+import Dropdown from "./dropdown";
 import ERID   from '../assets/ERID.png'
 const Header = () => {
   return (

@@ -1,4 +1,4 @@
-import { auth } from "../config/firebase";
+import { auth } from "../config/Firebase";
 
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
@@ -25,7 +25,7 @@ export const SignUp = () => {
     <div className="flex justify-center items-center mx-auto h-screen">
       <div className="container">
         <form
-          className="p-10 w-4/12  mx-auto border rounded-md"
+          className="p-10 w-4/12  mx-auto rounded-md"
           onSubmit={createAccount}
         >
           <h1 className="text-3xl font-bold text-center tracking-widest mb-6">
